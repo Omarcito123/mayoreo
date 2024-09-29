@@ -1,0 +1,57 @@
+<div class="container textCon">
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-lg-8">
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Filtro</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Filtro" autocomplete="off">
+            </mat-form-field>
+        </div>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tablavg" matSort style="margin-bottom: 25px;">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Fecha </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.dateadd | date:'dd/MM/yyyy'}}</td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Total Vendido </th>
+            <td mat-cell *matCellDef="let element" style="text-align: right;">{{element.nombredeudor}}</td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="totalvendido">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Total Vendido </th>
+            <td mat-cell *matCellDef="let element" style="text-align: right;">{{element.totalsaleprice | currency}}</td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="totalganancia">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Total Vendido </th>
+            <td mat-cell *matCellDef="let element" style="text-align: right;">{{element.ganancia | currency}}</td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center; font-weight: bold;"> Opciones </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">
+                <mat-icon matTooltip="Eliminar" class="micon" (click)="deletePendiente(element)">delete</mat-icon>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <div style="text-align: right; margin-right: 25px;">
+        <h3 style="font-weight: bold;">Venta total mes: {{ totalVentasMes | currency }}</h3>
+    </div>
+    <div style="text-align: right; margin-right: 25px;">
+        <h3 style="font-weight: bold;">Ganancia total mes: {{ totalGanancias | currency }}</h3>
+    </div>
+    <mat-paginator [pageSizeOptions]="[50, 100, 150]" showFirstLastButtons></mat-paginator>
+</div>

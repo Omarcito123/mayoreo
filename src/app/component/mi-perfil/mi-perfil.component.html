@@ -1,0 +1,80 @@
+<div class="container textCon" style="margin-top: 15px;">
+    <h3 class="font-weight-bold">Mi Perfil</h3>
+    <form style="margin-bottom: 40px;">
+        <div class="row">
+            <div class="col-md-3">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Primer nombre</mat-label>
+                    <input matInput placeholder="Ingresa tu primer nombre" type="vtextlor" [(ngModel)]="myPerfil.firstname" name="firstname">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Segundo nombre</mat-label>
+                    <input matInput placeholder="Ingresa tu segundo nombre" type="text" [(ngModel)]="myPerfil.secondname" name="secondname">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Primer apellido</mat-label>
+                    <input matInput placeholder="Ingresa tu primer apellido" type="text" [(ngModel)]="myPerfil.surname" name="surname">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Segundo apellido</mat-label>
+                    <input matInput placeholder="Ingresa tu segundo apellido" type="text" [(ngModel)]="myPerfil.secondsurname" name="secondsurname">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Usuario</mat-label>
+                    <input matInput [readonly]=true type="text" [(ngModel)]="myPerfil.username" name="username">
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <div class="input-field">
+                    <mat-form-field appearance="fill" style="width: 85%;">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput [readonly]=true type="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="myPerfil.pass" name="pass">
+                    </mat-form-field>
+                    <span class="fa fa-eye" style="margin-left: 5px; font-size: 1.6em; font-weight: bold;" (click)="showHidenPass()"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Ingresa tu email" type="text" [(ngModel)]="myPerfil.email" name="email">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label># Telefono</mat-label>
+                    <input matInput placeholder="Ingresa tu numero de telefono" type="text" [(ngModel)]="myPerfil.phone" name="phone">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Fecha nacimiento</mat-label>
+                    <input matInput placeholder="Ingresa tu fecha de nacimiento" type="date" [(ngModel)]="myPerfil.dateborn" name="dateborn">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Rol</mat-label>
+                    <input matInput [readonly]=true type="text" [(ngModel)]="myPerfil.rolname" name="rol">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row" style="float: right;">
+            <div class="example-button-row">
+                <button mat-flat-button color="warn" style="margin-right: 10px;" (click)="changePass()">Cambiar contraseña</button>
+                <button mat-flat-button color="primary" (click)="updatePerfil()">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>

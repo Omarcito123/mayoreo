@@ -1,0 +1,32 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Login Form | CodingLab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="title"><span>Bienvenido</span></div>
+        <form action="#">
+          <div class="row">
+            <i class="fas fa-user"></i>
+            <input autocomplete="off" type="text" placeholder="Usuario" [(ngModel)]="userLogin.username" name="username" required>
+          </div>
+          <div class="row">
+            <i class="fas fa-lock"></i>
+            <input autocomplete="off" type="password" placeholder="Contraseña" [(ngModel)]="userLogin.pass" name="password" required>
+          </div>
+          <div class="pass"><a href="#">Olvidaste tu contraseña?</a></div>
+          <div class="row button">
+            <input type="submit" (click)="login(userLogin)" value="Login">
+          </div>
+        </form>
+        <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+            <p style="color: white">Cargando...</p>
+        </ngx-spinner>
+      </div>
+    </div>
+  </body>
+</html>

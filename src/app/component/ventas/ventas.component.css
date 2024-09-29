@@ -1,0 +1,23 @@
+.container {
+    padding-top: 15px;
+}
+
+.fila {
+    padding: 0px;
+}
+
+.mat-icon {
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
+.mat-card {
+    padding: 1px;
+}
+
+.mat-tab-label {
+    height: 38px !important;
+}

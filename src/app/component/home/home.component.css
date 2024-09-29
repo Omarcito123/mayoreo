@@ -1,0 +1,37 @@
+.mat-list-base .mat-list-item,
+.mat-list-base .mat-list-option {
+    height: 46px !important;
+}
+
+.mat-list-base .mat-list-item {
+    font-size: 12px;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+    height: 40px;
+}
+
+.mat-toolbar-multiple-rows {
+    min-height: 40px;
+}
+
+.mat-list-base {
+    padding-top: 0px;
+}
+
+.sesionIcon {
+    margin-right: 0px !important;
+    padding-right: 0px !important;
+}
+
+.offSesion {
+    margin-top: auto;
+    margin-bottom: auto;
+    outline: none;
+    cursor: pointer;
+}
+
+.custom-dialog-container .mat-dialog-container {
+    overflow-y: hidden;
+  }

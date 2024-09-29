@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Cambiar contraseña</h1>
+<div mat-dialog-content>
+    <form style="margin-bottom: 40px; min-width: 350px;">
+        <div class="form-group py-1 pb-2">
+            <div class="input-field">
+                <input autocomplete="off" style="float: left" placeholder="Ingresa la contraseña actual" type="password" name="actual" [(ngModel)]="actual" [type]="hide ? 'password' : 'text'">
+                <button class="btn bg-white text-muted"> 
+                    <span class="fa fa-eye" (click)="showHidenPass()"></span> 
+                </button>
+            </div>
+        </div>
+        <div class="form-group py-1 pb-2">
+            <div class="input-field">
+                <input autocomplete="off" style="float: left" name="nueva" placeholder="Ingresa la nueva contraseña" type="password" [(ngModel)]="nueva" [type]="hide2 ? 'password' : 'text'" required>
+                <button class="btn bg-white text-muted"> 
+                    <span class="fa fa-eye" (click)="showHidenPass2()"></span> 
+                </button>
+            </div>
+        </div>
+        <div class="form-group py-1 pb-2">
+            <div class="input-field">
+                <input autocomplete="off" style="float: left" placeholder="Confirma nueva contraseña" type="password" name="confirma" [(ngModel)]="confirma" [type]="hide3 ? 'password' : 'text'">
+                <button class="btn bg-white text-muted"> 
+                    <span class="fa fa-eye" (click)="showHidenPass3()"></span> 
+                </button>
+            </div>
+        </div>
+        <div class="form-row" style="float: right;">
+            <div class="example-button-row">
+                <button mat-flat-button color="warn" (click)="onNoClick()" style="margin-right: 20px;">Cancelar</button>
+                <button mat-flat-button color="primary" (click)="changePass()">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>

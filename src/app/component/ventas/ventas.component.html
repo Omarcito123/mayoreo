@@ -1,0 +1,178 @@
+<mat-tab-group class="demo-tab-group">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+                <span>Realizar venta</span>
+            </div>
+        </ng-template>
+        <div class="container">
+            <mat-tab-group>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <div class="col-md-4" style="margin-bottom: 10px;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span>Agregar productos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <div class="col-md-12" style="margin-top: 25px;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field appearance="fill" style="width: 100%;">
+                                    <mat-label>Nombre</mat-label>
+                                    <input type="text" placeholder="Nombre del producto" (focusout)="fillDataProduct()" [(ngModel)]="productSell.productname" [formControl]="myControl" name="productname" aria-label="Nombre" matInput [matAutocomplete]="auto" />
+                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                            {{ option }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <mat-form-field appearance="fill" style="width: 100%;">
+                                        <mat-label>Existencias</mat-label>
+                                        <input matInput readonly="true" placeholder="Existencias el producto" name="existence" [(ngModel)]="productSell.existence" type="text" />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field appearance="fill" style="width: 100%;">
+                                        <mat-label>Cantidad</mat-label>
+                                        <input matInput placeholder="0.00" type="number" name="cantidadProduct" [(ngModel)]="productSell.quantity" (focusout)="calcularTotalProd()" />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field appearance="fill" style="width: 100%;">
+                                        <mat-label>Precio</mat-label>
+                                        <input matInput placeholder="0.00" name="saleprice" (focusout)="calcultatePrice(productSell)" [(ngModel)]="productSell.saleprice" type="number" />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field appearance="fill" style="width: 100%;">
+                                        <mat-label>Total</mat-label>
+                                        <input matInput placeholder="0.00" type="number" name="totalProduct" [(ngModel)]="productSell.totalprice" />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="float: right; margin-bottom: 20px;">
+                            <div class="example-button-row">
+                                <button mat-flat-button color="warn" (click)="clearProduct()" style="margin-right: 10px;">Limpiar</button>
+                                <button mat-flat-button color="primary" (click)="agregarProducto()">Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <div class="col-md-6" style="margin-bottom: 10px;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-icon>shopping_cart</mat-icon>
+                                    <span matBadge="{{ itemsInCar }}" matBadgeOverlap="false" style="margin-top: 5px;"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <div class="col-lg-12">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tablavg" matSort style="margin-bottom: 25px;">
+
+                            <!--- Note that these columns can be defined in any order.
+                                  The actual rendered columns are set as a property on the row definition" -->
+
+                                  <!-- Position Column -->
+                            <ng-container matColumnDef="unitaverage">
+                                <th mat-header-cell *matHeaderCellDef style="font-weight: bold;"> Unidad de medida </th>
+                                <td mat-cell *matCellDef="let element"> {{element.productname == 'totalAllProduct' ? '' : element.unitaverage}} </td>
+                            </ng-container>
+
+                            <!-- Position Column -->
+                            <ng-container matColumnDef="cantidad">
+                                <th mat-header-cell *matHeaderCellDef style="font-weight: bold;"> Cantidad </th>
+                                <td mat-cell *matCellDef="let element"> {{element.productname == 'totalAllProduct' ? '' : element.quantity}} </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="nombre">
+                                <th mat-header-cell *matHeaderCellDef style="font-weight: bold;"> Nombre </th>
+                                <td mat-cell *matCellDef="let element"> {{ element.productname == 'totalAllProduct' ? '' : element.productname }} </td>
+                            </ng-container>
+
+                            <!-- Weight Column -->
+                            <ng-container matColumnDef="precioregular">
+                                <div>
+                                    <th mat-header-cell *matHeaderCellDef style="text-align: center; font-weight: bold;"> Precio unidad </th>
+                                    <td mat-cell *matCellDef="let element" style="text-align: right;"> {{ element.productname == 'totalAllProduct' ? '' : element.saleprice | currency }} </td>
+                                </div>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="precioTotal">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center; font-weight: bold;"> Total </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: right;"> {{ element.totalprice | currency }} </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="ganancia">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center; font-weight: bold;"> Ganancia </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: right;"> {{ element.totalprice - (element.quantity * element.purchaseprice) | currency }} </td>
+                            </ng-container>
+
+                            <!-- Symbol Column -->
+                            <ng-container matColumnDef="options">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center; font-weight: bold;"> Opciones </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                                    <mat-icon matTooltip="Eliminar" *ngIf="element.productname != 'totalAllProduct'" class="micon" (click)="deleteProductCar(element)">delete</mat-icon>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <div class="col-md-12" style="margin-bottom: 15px;">
+                            <div class="row" style="float: right;">
+                                <div class="col-md-6" >
+                                    <span style="font-weight: bold;">Venta total: {{ totalCompra | currency }}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <span style="font-weight: bold;">Ganancia total: {{ gananciaTotal | currency }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div *ngIf="itemsInCar == 0" style="text-align: center;">
+                                    <p style="text-align: center;">No hay productos agregados</p>
+                                </div>
+                                <div *ngIf="itemsInCar > 0" class="row" style="text-align: right; margin-bottom: 50px;">
+                                    <div class="col-lg-3">
+                                        <button *ngIf="noInProgres" mat-flat-button color="primary" style="text-align: right; margin-bottom: 10px;" (click)="realizarVenta()">Realizar venta</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </mat-tab>
+    <mat-tab label="Ventas del dia">
+        <div class="container">
+            <app-list-ventas></app-list-ventas>
+        </div>
+    </mat-tab>
+    <mat-tab label="Ventas diarias">
+        <div class="container">
+            <app-ventas-diarias></app-ventas-diarias>
+        </div>
+    </mat-tab>
+    <mat-tab label="Ventas mensuales">
+        <div class="container">
+            <app-ventas-mensuales></app-ventas-mensuales>
+        </div>
+    </mat-tab>
+</mat-tab-group>

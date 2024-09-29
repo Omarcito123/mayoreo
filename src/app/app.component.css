@@ -1,0 +1,7 @@
+.mat-option:hover {
+  background-color: grey !important;
+}
+
+.custom-dialog-container .mat-dialog-container {
+  overflow-y: hidden;
+}
